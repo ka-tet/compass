@@ -40,13 +40,13 @@ public class QuartzJobService {
 	
 	@PostConstruct
 	public void setupJobs() throws ParseException, SchedulerException {
-	/*	
-		QuartzTriggerJob job1 = schedulerJobFactory.getTriggerJob("JOB-TEST-1");
-		QuartzTriggerJob job2 = schedulerJobFactory.getTriggerJob("JOB-TEST-2");
 		
-		scheduleTriggerJob(job1, "0/8 * * * * ?", "TRIGGER-TEST-1");
-		scheduleTriggerJob(job2, "0/9 * * * * ?", "TRIGGER-TEST-2");
-		*/
+		QuartzTriggerJob job1 = schedulerJobFactory.getTriggerJob("JOB-TEST-1a");
+		QuartzTriggerJob job2 = schedulerJobFactory.getTriggerJob("JOB-TEST-2a");
+		
+		scheduleTriggerJob(job1, "0/8 * * * * ?", "TRIGGER-TEST-1a");
+		scheduleTriggerJob(job2, "0/9 * * * * ?", "TRIGGER-TEST-2a");
+		
 		scheduler = schedulerFactoryBean.getScheduler();
 		log.info("Starting Quartz scheduler " + scheduler.getSchedulerName());
 		scheduler.start();
