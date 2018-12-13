@@ -40,7 +40,7 @@ public class QuartzJobRepository implements JpaRepository<QuartzJob, QuartzJobId
 		List<QuartzJobId> search = new ArrayList<QuartzJobId>();
 		try {
 			for(JobKey jobKey: scheduler.getJobKeys(matcher)) {
-				search.add(new QuartzJobId(scheduler.getSchedulerName(), jobKey.getGroup(), jobKey.getName()));
+				search.add(new QuartzJobId(jobKey.getGroup(), jobKey.getName()));
 			}
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
@@ -144,7 +144,7 @@ public class QuartzJobRepository implements JpaRepository<QuartzJob, QuartzJobId
 		try {
 			for(JobKey jobKey: scheduler.getJobKeys(matcher)) {
 				QuartzJob job = new QuartzJob();
-				job.setId(new QuartzJobId(scheduler.getSchedulerName(), jobKey.getGroup(), jobKey.getName()));
+				job.setId(new QuartzJobId(jobKey.getGroup(), jobKey.getName()));
 				results.add(job);
 			}
 		} catch (SchedulerException e) {

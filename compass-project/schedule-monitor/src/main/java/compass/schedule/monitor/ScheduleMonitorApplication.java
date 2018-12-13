@@ -38,7 +38,7 @@ public class ScheduleMonitorApplication {
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx){ // After ApplicationMonitor started.
 		return args -> {
 			log.info("CommandLineRunner " + new java.util.Date());
-			log.info(scheduleMonitorController.getSchedulers().toString())
-;		};
+//			log.info(scheduleMonitorController.getSchedulers().toString());
+		};
 	}
 }

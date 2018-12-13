@@ -24,7 +24,7 @@ public class ApplicationMonitor {
 	
 	@PostConstruct
 	public void init() throws Exception {
-		log.info("Schedular ApplicationMonitor started.");
+		log.info("Compass ApplicationMonitor started.");
 		log.info("Timeout: " + timeout);
 	}
 	

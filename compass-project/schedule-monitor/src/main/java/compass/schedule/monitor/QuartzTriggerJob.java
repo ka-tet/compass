@@ -27,7 +27,7 @@ public class QuartzTriggerJob extends QuartzJobBean {
 		
 		JobDetail jobDetail = jobContext.getJobDetail();
 		JobDataMap jobDataMap = jobContext.getMergedJobDataMap();
-		log.info(String.format("%s %s fired for %s at %s will fire again at %s", fireInstanceId, jobDetail.getKey(), jobDataMap.getString("SchedularJobName"), jobContext.getFireTime(), jobContext.getNextFireTime()));
+		log.info(String.format("%s %s fired at %s will fire again at %s", fireInstanceId, jobDetail.getKey(), jobContext.getFireTime(), jobContext.getNextFireTime()));
 	}
 
 }

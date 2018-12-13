@@ -6,7 +6,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SchedulerJobFactory
+public class CompassJobFactory
 {
 
     public JobDetailFactoryBean job(
@@ -31,10 +31,7 @@ public class SchedulerJobFactory
 
     public TriggerJob getTriggerJob(String jobName) {
     	TriggerJob triggerJob = new TriggerJob();
-    	JobDetailFactoryBean jobDetail = createJobDetail(TriggerJob.class);
-    	jobDetail.setBeanName(jobName);
-    	jobDetail.afterPropertiesSet();
-    	triggerJob.setJobDetail(jobDetail.getObject());
+    	triggerJob.setJobName(jobName);
     	return triggerJob;
     }
 

@@ -8,10 +8,10 @@
 
 	<schedule>
 		<job>
-			<name>SCH10000</name>
-			<group>SCHEDULAR</group>
+			<name>sys10000</name>
+			<group>system</group>
 			<description>Validation job.</description>
-			<job-class>schedular.engine.QuartzTriggerJob</job-class>
+			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
 	        <job-data-map>
 	            <entry>
 	                <key>SchedularJobName</key>
@@ -20,10 +20,10 @@
 	        </job-data-map>
 		</job>
 		<job>
-			<name>SCH20000</name>
-			<group>SCHEDULAR</group>
+			<name>sys20000</name>
+			<group>system</group>
 			<description>Validation job.</description>
-			<job-class>schedular.engine.QuartzTriggerJob</job-class>
+			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
 	        <job-data-map>
 	            <entry>
 	                <key>SchedularJobName</key>
@@ -31,16 +31,34 @@
 	            </entry>
 	        </job-data-map>
 		</job>
+		<job>
+			<name>demo-triggerjob-1</name>
+			<group>demo</group>
+			<description>Demo job.</description>
+			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+		</job>
+		<job>
+			<name>demo-triggerjob-2</name>
+			<group>demo</group>
+			<description>Demo job.</description>
+			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+		</job>
+		<job>
+			<name>demo-triggerjob-3</name>
+			<group>demo</group>
+			<description>Demo job.</description>
+			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+		</job>
 		<trigger>
 	        <simple>
-	            <name>SCH10000</name>
-	            <group>SCHEDULAR</group>
-	            <job-name>SCH10000</job-name>
-	            <job-group>SCHEDULAR</job-group>
+	            <name>sys10000</name>
+	            <group>system</group>
+	            <job-name>sys10000</job-name>
+	            <job-group>system</job-group>
 		        <job-data-map>
 		        	<entry>
 		        		<key>TriggerName</key>
-		        		<value>SCH10000</value>
+		        		<value>sys10000</value>
 		        	</entry>
 		            <entry>
 		                <key>SchedularJobName</key>
@@ -54,14 +72,14 @@
 	    </trigger>
 		<trigger>
 	        <simple>
-	            <name>SCH20000</name>
-	            <group>SCHEDULAR</group>
-	            <job-name>SCH20000</job-name>
-	            <job-group>SCHEDULAR</job-group>
+	            <name>sys20000</name>
+	            <group>system</group>
+	            <job-name>sys20000</job-name>
+	            <job-group>system</job-group>
 		        <job-data-map>
 		        	<entry>
 		        		<key>TriggerName</key>
-		        		<value>SCH20000</value>
+		        		<value>sys20000</value>
 		        	</entry>
 		            <entry>
 		                <key>SchedularJobName</key>
@@ -75,14 +93,14 @@
 	    </trigger>
 		<trigger>
 	        <simple>
-	            <name>SCH10001</name>
-	            <group>SCHEDULAR</group>
-	            <job-name>SCH10000</job-name>
-	            <job-group>SCHEDULAR</job-group>
+	            <name>sys10001</name>
+	            <group>system</group>
+	            <job-name>sys10000</job-name>
+	            <job-group>system</job-group>
 		        <job-data-map>
 		        	<entry>
 		        		<key>TriggerName</key>
-		        		<value>SCH10001</value>
+		        		<value>sys10001</value>
 		        	</entry>
 		            <entry>
 		                <key>SchedularJobName</key>

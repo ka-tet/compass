@@ -39,13 +39,13 @@ public class QuartzJobService {
 	private Scheduler scheduler;
 	
 	@PostConstruct
-	public void setupJobs() throws ParseException, SchedulerException {
+	public void start() throws ParseException, SchedulerException {
 		
-		QuartzTriggerJob job1 = schedulerJobFactory.getTriggerJob("JOB-TEST-1a");
-		QuartzTriggerJob job2 = schedulerJobFactory.getTriggerJob("JOB-TEST-2a");
+//		QuartzTriggerJob job1 = schedulerJobFactory.getTriggerJob("JOB-TEST-1a");
+//		QuartzTriggerJob job2 = schedulerJobFactory.getTriggerJob("JOB-TEST-2a");
 		
-		scheduleTriggerJob(job1, "0/8 * * * * ?", "TRIGGER-TEST-1a");
-		scheduleTriggerJob(job2, "0/9 * * * * ?", "TRIGGER-TEST-2a");
+//		scheduleTriggerJob(job1, "0/8 * * * * ?", "TRIGGER-TEST-1a");
+//		scheduleTriggerJob(job2, "0/9 * * * * ?", "TRIGGER-TEST-2a");
 		
 		scheduler = schedulerFactoryBean.getScheduler();
 		log.info("Starting Quartz scheduler " + scheduler.getSchedulerName());
@@ -69,10 +69,10 @@ public class QuartzJobService {
 	
 	public List<String> listJobs(){
 		List<String> results = new ArrayList<String>();
-		results.add("  Schedule      Group         Job");
-		results.add("____________ ____________ ____________");
+		results.add("   Group         Job");
+		results.add("____________ ____________");
 		for(QuartzJob job: getJobs()) {
-			results.add(String.format("%12s %12s %12s", left(job.getScheduleName(),12), left(job.getGroupName(),12), left(job.getJobName(),12)));
+			results.add(String.format("%12s %12s", left(job.getGroupName(),12), left(job.getJobName(),12)));
 		}
 		for(String i: results) {
 			log.info(i);
@@ -108,6 +108,9 @@ public class QuartzJobService {
 			log.info(i);
 		}
 		return results;
+	}
+	public void scheduleJob() {
+		
 	}
 	private String left(String string, int chars) {
 		if(string == null) return null;

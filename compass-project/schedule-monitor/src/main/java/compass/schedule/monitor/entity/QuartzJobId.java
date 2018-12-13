@@ -8,7 +8,7 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class QuartzJobId implements Serializable{
 	
-	private String scheduleName;
+//	private String scheduleName;
 	private String groupName;
 	private String jobName;
 
@@ -16,13 +16,13 @@ public class QuartzJobId implements Serializable{
 		
 	}
 	
-	public QuartzJobId(String scheduleNAme, String groupName, String jobName) {
-		this.scheduleName = scheduleName;
+	public QuartzJobId(String groupName, String jobName) {
+//		this.scheduleName = scheduleName;
 		this.groupName = groupName;
 		this.jobName = jobName;
 	}
 	
-	public String getScheduleName() { return this.scheduleName; }
+//	public String getScheduleName() { return this.scheduleName; }
 	public String getGroupName() { return this.groupName; }
 	public String getJobName() {return this.jobName; }
 	
@@ -31,14 +31,14 @@ public class QuartzJobId implements Serializable{
         if (this == o) return true;
         if (!(o instanceof QuartzJobId)) return false;
         QuartzJobId that = (QuartzJobId) o;
-        return Objects.equals(getScheduleName(), that.getScheduleName()) &&
+        return // Objects.equals(getScheduleName(), that.getScheduleName()) &&
         		Objects.equals(getGroupName(), that.getGroupName()) &&
         		Objects.equals(getJobName(), that.getJobName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getScheduleName(), getGroupName(), getJobName());
+        return Objects.hash(getGroupName(), getJobName());
     }
 
 }

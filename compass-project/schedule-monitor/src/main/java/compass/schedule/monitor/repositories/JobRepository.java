@@ -18,7 +18,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
-import compass.schedule.monitor.SchedulerJobFactory;
+import compass.schedule.monitor.CompassJobFactory;
 import compass.schedule.monitor.entity.Job;
 import compass.schedule.monitor.entity.QuartzJobId;
 
@@ -28,8 +28,8 @@ public class JobRepository implements JpaRepository<Job, QuartzJobId> {
 	@Autowired
 	private SchedulerFactoryBean schedulerFactoryBean;
 
-	@Autowired
-	private SchedulerJobFactory schedulerJobFactory;
+//	@Autowired
+//	private CompassJobFactory schedulerJobFactory;
 
 	public List<Job> findAllById(Iterable<QuartzJobId> id)  {
 		Scheduler scheduler = schedulerFactoryBean.getScheduler();
@@ -38,7 +38,7 @@ public class JobRepository implements JpaRepository<Job, QuartzJobId> {
 		List<QuartzJobId> search = new ArrayList<QuartzJobId>();
 		try {
 			for(JobKey jobKey: scheduler.getJobKeys(matcher)) {
-				search.add(new QuartzJobId(scheduler.getSchedulerName(), jobKey.getGroup(), jobKey.getName()));
+				search.add(new QuartzJobId(jobKey.getGroup(), jobKey.getName()));
 			}
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
@@ -142,7 +142,7 @@ public class JobRepository implements JpaRepository<Job, QuartzJobId> {
 		try {
 			for(JobKey jobKey: scheduler.getJobKeys(matcher)) {
 				Job job = new Job();
-				job.setId(new QuartzJobId(scheduler.getSchedulerName(), jobKey.getGroup(), jobKey.getName()));
+				job.setId(new QuartzJobId(jobKey.getGroup(), jobKey.getName()));
 				results.add(job);
 			}
 		} catch (SchedulerException e) {

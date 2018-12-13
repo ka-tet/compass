@@ -7,11 +7,12 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 
-public class TriggerJob extends QuartzJobBean {
+public class TriggerJob {
 	private static Logger log = LoggerFactory.getLogger(TriggerJob.class);
 
 	private String jobName = "";
 	private JobDetail jobDetail;
+	
 	
 	public String getJobName() {
 		return this.jobName;
@@ -29,7 +30,7 @@ public class TriggerJob extends QuartzJobBean {
 		this.jobDetail = jobDetail;
 	}
 	
-	@Override
+//	@Override
 	protected void executeInternal(JobExecutionContext jobContext) throws JobExecutionException {
 //		log.info("--------------------------------------------------------------------");
 		JobDetail jobDetail = jobContext.getJobDetail();
