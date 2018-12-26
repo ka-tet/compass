@@ -47,6 +47,7 @@ public class JobService {
 		for(QuartzJob quartzJob : quartzJobService.getJobs()) {
 			TriggerJob job = new TriggerJob();
 			//job.setJobDetail(quartzJob.getJobDetail());
+			job.setGroupName(quartzJob.getGroupName());
 			job.setJobName(quartzJob.getJobName());
 			jobs.add(job);
 		}

@@ -3,6 +3,7 @@ package compass.schedule.monitor;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.quartz.JobKey;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
@@ -11,6 +12,11 @@ public class TriggerJob {
 	private static Logger log = LoggerFactory.getLogger(TriggerJob.class);
 
 	private String jobName = "";
+	private String groupName = "";
+	public String getGroupName() {
+		return groupName;
+	}
+
 	private JobDetail jobDetail;
 	
 	
@@ -39,6 +45,11 @@ public class TriggerJob {
 //		log.info("TriggerJob end: " + jobContext.getJobRunTime() + ", key: " + jobDetail.getKey());
 //		log.info("TriggerJob next scheduled time: " + jobContext.getNextFireTime());
 //		log.info("--------------------------------------------------------------------");
+		
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
 		
 	}
 

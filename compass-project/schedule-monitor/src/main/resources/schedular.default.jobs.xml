@@ -108,8 +108,8 @@
 		            </entry>
 		        </job-data-map>
 		        <misfire-instruction>MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT</misfire-instruction>
-	            <repeat-count>5</repeat-count>
-	            <repeat-interval>7000</repeat-interval>
+	            <repeat-count>50</repeat-count>
+	            <repeat-interval>70000</repeat-interval>
 	        </simple>
 	    </trigger>
 	</schedule>

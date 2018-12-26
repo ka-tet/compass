@@ -86,8 +86,9 @@ public class Commands {
 //
 		} else {
 			LinkedHashMap<String, Object> headers = new LinkedHashMap<>();
-			headers.put("key", "JobKey");
-			headers.put("description", "Description");
+			headers.put("groupName",  "Group Name");
+			headers.put("jobName", "Job Name");
+//			headers.put("description", "Description");
 //			headers.put("jobDataMap", "Data Map");
 //		
 			TableModel model = new BeanListTableModel<>(jobs, headers);

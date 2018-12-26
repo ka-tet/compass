@@ -143,9 +143,9 @@ public class QuartzJobRepository implements JpaRepository<QuartzJob, QuartzJobId
 		List<QuartzJob> results = new ArrayList<QuartzJob>();
 		try {
 			for(JobKey jobKey: scheduler.getJobKeys(matcher)) {
-				QuartzJob job = new QuartzJob();
-				job.setId(new QuartzJobId(jobKey.getGroup(), jobKey.getName()));
-				results.add(job);
+//				QuartzJob job = new QuartzJob();
+//				job.setId(new QuartzJobId(jobKey.getGroup(), jobKey.getName()));
+				results.add(new QuartzJob(new QuartzJobId(jobKey.getGroup(), jobKey.getName())));
 			}
 		} catch (SchedulerException e) {
 			// TODO Auto-generated catch block
