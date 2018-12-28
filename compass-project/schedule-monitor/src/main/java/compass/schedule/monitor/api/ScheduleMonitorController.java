@@ -24,9 +24,6 @@ public class ScheduleMonitorController {
 	@Autowired
 	JobService jobService;
 	
-	@Autowired
-	QuartzJobService quartzJobService;
-	
 	@GetMapping
 	public ResponseEntity<?> getAll() {
 		return null; // new ResponseEntity(schedulerJobService.findAll(), HttpStatus.OK);
@@ -40,7 +37,6 @@ public class ScheduleMonitorController {
 
 	@GetMapping("/jobs")
 	public ResponseEntity<?> getJobs() throws SchedulerException {
-		quartzJobService.listJobs();
 		var response = new ResponseEntity(jobService.getJobs(), HttpStatus.OK);
 		return response;
 	}
