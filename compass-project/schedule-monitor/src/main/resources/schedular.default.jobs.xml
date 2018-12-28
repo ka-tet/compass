@@ -3,114 +3,123 @@
 	xmlns="http://www.quartz-scheduler.org/xml/JobSchedulingData"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.quartz-scheduler.org/xml/JobSchedulingData
-        http://www.quartz-scheduler.org/xml/job_scheduling_data_1_8.xsd"
-	version="1.8">
-
+        http://www.quartz-scheduler.org/xml/job_scheduling_data_2_0.xsd"
+	version="2.0">
 	<schedule>
-		<job>
-			<name>sys10000</name>
-			<group>system</group>
-			<description>Validation job.</description>
-			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+	<job>
+		<name>sys10000</name>
+		<group>system</group>
+		<description>Validation job.</description>
+		<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+        <durability>true</durability>
+        <recover>false</recover>
+        <job-data-map>
+            <entry>
+                <key>CompassTriggerName</key>
+                <value>system.sys10000</value>
+            </entry>
+        </job-data-map>
+	</job>
+	<job>
+		<name>sys20000</name>
+		<group>system</group>
+		<description>Validation job.</description>
+		<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+        <durability>true</durability>
+        <recover>false</recover>
+        <job-data-map>
+            <entry>
+                <key>SchedularJobName</key>
+                <value>job</value>
+            </entry>
+        </job-data-map>
+	</job>
+	<job>
+		<name>demo-triggerjob-1</name>
+		<group>demo</group>
+		<description>Demo job.</description>
+		<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+        <durability>true</durability>
+        <recover>false</recover>
+	</job>
+	<job>
+		<name>demo-triggerjob-2</name>
+		<group>demo</group>
+		<description>Demo job.</description>
+		<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+        <durability>true</durability>
+        <recover>false</recover>
+	</job>
+	<job>
+		<name>demo-triggerjob-3</name>
+		<group>demo</group>
+		<description>Demo job.</description>
+		<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+        <durability>true</durability>
+        <recover>false</recover>
+	</job>
+	<trigger>
+        <simple>
+            <name>sys10000</name>
+            <group>system</group>
+            <job-name>sys10000</job-name>
+            <job-group>system</job-group>
 	        <job-data-map>
+	        	<entry>
+	        		<key>TriggerName</key>
+	        		<value>sys10000</value>
+	        	</entry>
 	            <entry>
 	                <key>SchedularJobName</key>
-	                <value>job</value>
+	                <value>trigger</value>
 	            </entry>
 	        </job-data-map>
-		</job>
-		<job>
-			<name>sys20000</name>
-			<group>system</group>
-			<description>Validation job.</description>
-			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+	        <misfire-instruction>MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT</misfire-instruction>
+            <repeat-count>5</repeat-count>
+            <repeat-interval>10000</repeat-interval>
+        </simple>
+    </trigger>
+	<trigger>
+        <simple>
+            <name>sys20000</name>
+            <group>system</group>
+            <job-name>sys20000</job-name>
+            <job-group>system</job-group>
 	        <job-data-map>
+	        	<entry>
+	        		<key>TriggerName</key>
+	        		<value>sys20000</value>
+	        	</entry>
 	            <entry>
 	                <key>SchedularJobName</key>
-	                <value>job</value>
+	                <value>trigger</value>
 	            </entry>
 	        </job-data-map>
-		</job>
-		<job>
-			<name>demo-triggerjob-1</name>
-			<group>demo</group>
-			<description>Demo job.</description>
-			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
-		</job>
-		<job>
-			<name>demo-triggerjob-2</name>
-			<group>demo</group>
-			<description>Demo job.</description>
-			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
-		</job>
-		<job>
-			<name>demo-triggerjob-3</name>
-			<group>demo</group>
-			<description>Demo job.</description>
-			<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
-		</job>
-		<trigger>
-	        <simple>
-	            <name>sys10000</name>
-	            <group>system</group>
-	            <job-name>sys10000</job-name>
-	            <job-group>system</job-group>
-		        <job-data-map>
-		        	<entry>
-		        		<key>TriggerName</key>
-		        		<value>sys10000</value>
-		        	</entry>
-		            <entry>
-		                <key>SchedularJobName</key>
-		                <value>trigger</value>
-		            </entry>
-		        </job-data-map>
-		        <misfire-instruction>MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT</misfire-instruction>
-	            <repeat-count>5</repeat-count>
-	            <repeat-interval>10000</repeat-interval>
-	        </simple>
-	    </trigger>
-		<trigger>
-	        <simple>
-	            <name>sys20000</name>
-	            <group>system</group>
-	            <job-name>sys20000</job-name>
-	            <job-group>system</job-group>
-		        <job-data-map>
-		        	<entry>
-		        		<key>TriggerName</key>
-		        		<value>sys20000</value>
-		        	</entry>
-		            <entry>
-		                <key>SchedularJobName</key>
-		                <value>trigger</value>
-		            </entry>
-		        </job-data-map>
-		        <misfire-instruction>MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT</misfire-instruction>
-	            <repeat-count>5</repeat-count>
-	            <repeat-interval>10000</repeat-interval>
-	        </simple>
-	    </trigger>
-		<trigger>
-	        <simple>
-	            <name>sys10001</name>
-	            <group>system</group>
-	            <job-name>sys10000</job-name>
-	            <job-group>system</job-group>
-		        <job-data-map>
-		        	<entry>
-		        		<key>TriggerName</key>
-		        		<value>sys10001</value>
-		        	</entry>
-		            <entry>
-		                <key>SchedularJobName</key>
-		                <value>trigger</value>
-		            </entry>
-		        </job-data-map>
-		        <misfire-instruction>MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT</misfire-instruction>
-	            <repeat-count>50</repeat-count>
-	            <repeat-interval>70000</repeat-interval>
-	        </simple>
-	    </trigger>
-	</schedule>
+	        <misfire-instruction>MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT</misfire-instruction>
+            <repeat-count>5</repeat-count>
+            <repeat-interval>10000</repeat-interval>
+        </simple>
+    </trigger>
+	<trigger>
+        <simple>
+            <name>sys10001</name>
+            <group>system</group>
+            <job-name>sys10000</job-name>
+            <job-group>system</job-group>
+	        <job-data-map>
+	        	<entry>
+	        		<key>TriggerName</key>
+	        		<value>sys10001</value>
+	        	</entry>
+	            <entry>
+	                <key>SchedularJobName</key>
+	                <value>trigger</value>
+	            </entry>
+	        </job-data-map>
+	        <misfire-instruction>MISFIRE_INSTRUCTION_RESCHEDULE_NOW_WITH_EXISTING_REPEAT_COUNT</misfire-instruction>
+            <repeat-count>50</repeat-count>
+            <repeat-interval>70000</repeat-interval>
+        </simple>
+    </trigger>
+    </schedule>
 </job-scheduling-data>

@@ -76,21 +76,15 @@ public class Commands {
 		  new ParameterizedTypeReference<List<TriggerJob>>(){});
 		List<TriggerJob> jobs = response.getBody();
 		Log.info(response.toString());
-//		return jobs;
-//		List<JobDetail> jobs = schedulerService.getJobs();
 		if(!(jobs.size() > 0)) {
-			Object[][] data = new Object[1][];
+			Object[][] data = new Object[1][2];
 			data[0] = new Object[] { "XXX", "No jobs found."};
 			TableBuilder tableBuilder = new TableBuilder(new ArrayTableModel(data));
 			return tableBuilder.build();
-//
 		} else {
 			LinkedHashMap<String, Object> headers = new LinkedHashMap<>();
 			headers.put("groupName",  "Group Name");
 			headers.put("jobName", "Job Name");
-//			headers.put("description", "Description");
-//			headers.put("jobDataMap", "Data Map");
-//		
 			TableModel model = new BeanListTableModel<>(jobs, headers);
 			TableBuilder tableBuilder = new TableBuilder(model);
 			tableBuilder.addFullBorder(BorderStyle.oldschool);
