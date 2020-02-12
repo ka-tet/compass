@@ -13,7 +13,7 @@ public class FileSystemFile {
 	}
 	
 	public static boolean exists(String filename) {
-		return Files.exists(Paths.get("C:\\" + filename));
+		return Files.exists(Paths.get(filename));
 	}
 
 }

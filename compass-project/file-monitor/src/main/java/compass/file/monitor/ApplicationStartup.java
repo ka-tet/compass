@@ -19,9 +19,9 @@ public class ApplicationStartup  implements ApplicationRunner {
 		logger.info("compass.file.monitor started with options: {}", args.getSourceArgs());
 		logger.info("================================================================================");
 		
-		WebClient client = WebClient.create("http://localhost:8080");
+		WebClient client = WebClient.create("http://localhost:8080/api/exists?filename=//nas1/pers/AIS/ConfigAndSetup/jssecacerts");
 		WebClient.RequestBodySpec uri = client
 				.method(HttpMethod.GET);
-//		logger.info(uri.retrieve().bodyToMono(String.class).block());
+		logger.info(uri.retrieve().bodyToMono(String.class).block());
 	}
 }
