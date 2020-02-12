@@ -1,5 +1,7 @@
 package compass.schedule.monitor.api;
 
+import java.util.List;
+
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -37,7 +39,7 @@ public class ScheduleMonitorController {
 
 	@GetMapping("/jobs")
 	public ResponseEntity<?> getJobs() throws SchedulerException {
-		var response = new ResponseEntity(jobService.getJobs(), HttpStatus.OK);
+		ResponseEntity<?> response = new ResponseEntity<List>(jobService.getJobs(), HttpStatus.OK);
 		return response;
 	}
 
