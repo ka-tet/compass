@@ -23,5 +23,7 @@ public class ApplicationStartup  implements ApplicationRunner {
 		WebClient.RequestBodySpec uri = client
 				.method(HttpMethod.GET);
 		logger.info(uri.retrieve().bodyToMono(String.class).block());
+		// Can also be tested using curl:
+		// curl -X GET -F filename=\\\\nas1\\pers\\AIS\\ConfigAndSetup\\jssecacerts http://localhost:8080/api/exists
 	}
 }
