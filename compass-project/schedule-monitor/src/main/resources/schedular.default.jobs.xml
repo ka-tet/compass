@@ -24,7 +24,7 @@
 		<name>sys20000</name>
 		<group>system</group>
 		<description>Validation job.</description>
-		<job-class>compass.schedule.monitor.QuartzTriggerJob</job-class>
+		<job-class>compass.schedule.monitor.HeartbeatJob</job-class>
         <durability>true</durability>
         <recover>false</recover>
         <job-data-map>

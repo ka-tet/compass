@@ -13,7 +13,7 @@ public class QuartzTriggerJob extends QuartzJobBean {
 
 	private String jobName = "";
 	private JobDetail jobDetail;
-	private String fireInstanceId;
+	protected String fireInstanceId;
 	
 	public String getJobName() { return this.jobName; }
 	public void setJobName(String jobName) { this.jobName = jobName; }
