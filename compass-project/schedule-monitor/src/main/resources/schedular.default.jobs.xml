@@ -23,14 +23,18 @@
 	<job>
 		<name>sys20000</name>
 		<group>system</group>
-		<description>Validation job.</description>
+		<description>Heartbeat job.</description>
 		<job-class>compass.schedule.monitor.HeartbeatJob</job-class>
         <durability>true</durability>
         <recover>false</recover>
         <job-data-map>
             <entry>
-                <key>SchedularJobName</key>
-                <value>job</value>
+                <key>checkFileMonitor</key>
+                <value>true</value>
+            </entry>
+            <entry>
+                <key>fileMonitorUrl</key>
+                <value>http://localhost:8080/api/exists?filename=classpath:heartbeat.txt</value>
             </entry>
         </job-data-map>
 	</job>
