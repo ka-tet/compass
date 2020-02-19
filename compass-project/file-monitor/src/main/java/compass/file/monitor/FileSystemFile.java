@@ -4,11 +4,11 @@ import java.nio.file.*;
 
 public class FileSystemFile {
 	
-	public void FileSystemFile() {
+	public FileSystemFile() {
 		
 	}
 	
-	public void FileSystemFile(String filename) {
+	public FileSystemFile(String filename) {
 		
 	}
 	

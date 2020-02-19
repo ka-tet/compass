@@ -4,7 +4,6 @@ import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.Scheduler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
@@ -35,11 +34,11 @@ public class QuartzSystemJob extends QuartzJobBean {
 		JobDataMap jobDataMap = jobContext.getMergedJobDataMap();
 		log.info(String.format("%s %s fired for %s at %s will fire again at %s", fireInstanceId, jobDetail.getKey(), jobDataMap.getString("SchedularJobName"), jobContext.getFireTime(), jobContext.getNextFireTime()));
 	}
-	private void run(JobExecutionContext jobContext) {
-		log.info("Quartz maintenance:");
-		Scheduler scheduler = jobContext.getScheduler();
-		//log.info("%s", scheduler.getContext().);
-		
-	}
+//	private void run(JobExecutionContext jobContext) {
+//		log.info("Quartz maintenance:");
+//		//Scheduler scheduler = jobContext.getScheduler();
+//		//log.info("%s", scheduler.getContext().);
+//		
+//	}
 
 }

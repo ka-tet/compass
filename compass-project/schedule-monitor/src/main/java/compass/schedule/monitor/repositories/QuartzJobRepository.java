@@ -3,7 +3,6 @@ package compass.schedule.monitor.repositories;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
@@ -19,7 +18,6 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
-import compass.schedule.monitor.QuartzJobFactory;
 import compass.schedule.monitor.entity.QuartzJob;
 import compass.schedule.monitor.entity.QuartzJobId;
 
@@ -30,8 +28,8 @@ public class QuartzJobRepository implements JpaRepository<QuartzJob, QuartzJobId
 	@Autowired
 	private SchedulerFactoryBean schedulerFactoryBean;
 
-	@Autowired
-	private QuartzJobFactory schedulerJobFactory;
+//	@Autowired
+//	private QuartzJobFactory schedulerJobFactory;
 
 	public List<QuartzJob> findAllById(Iterable<QuartzJobId> id)  {
 		Scheduler scheduler = schedulerFactoryBean.getScheduler();

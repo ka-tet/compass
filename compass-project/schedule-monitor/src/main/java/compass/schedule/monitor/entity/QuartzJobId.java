@@ -7,6 +7,7 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class QuartzJobId implements Serializable{
+	static final long serialVersionUID = 0;
 	
 //	private String scheduleName;
 	private String groupName;

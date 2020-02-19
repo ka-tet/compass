@@ -4,7 +4,6 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -27,11 +26,11 @@ public class QuartzJobService {
 	@Autowired
 	private SchedulerFactoryBean schedulerFactoryBean;
 	
-	@Autowired
-	private QuartzJobFactory schedulerJobFactory;
-	
-	@Autowired
-	private QuartzTriggerFactory schedulerTriggerFactory;
+//	@Autowired
+//	private QuartzJobFactory schedulerJobFactory;
+//	
+//	@Autowired
+//	private QuartzTriggerFactory schedulerTriggerFactory;
 	
 	@Autowired
 	private QuartzJobRepository jobRepository;
@@ -64,7 +63,8 @@ public class QuartzJobService {
 	}
 	
 	public Date scheduleTriggerJob(QuartzTriggerJob job, String cronString, String triggerName) throws SchedulerException, ParseException {
-		return schedulerFactoryBean.getScheduler().scheduleJob(job.getJobDetail(), schedulerTriggerFactory.getTrigger(job.getJobDetail(), cronString, triggerName).getObject());
+//		return schedulerFactoryBean.getScheduler().scheduleJob(job.getJobDetail(), schedulerTriggerFactory.getTrigger(job.getJobDetail(), cronString, triggerName).getObject());
+		return new Date();
 	}
 	
 	public List<String> listJobs(){

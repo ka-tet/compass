@@ -2,21 +2,17 @@ package compass.schedule.monitor;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 import javax.annotation.PostConstruct;
 
 import org.quartz.SchedulerException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Service;
 
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 
 import compass.schedule.monitor.entity.QuartzJob;
-import compass.schedule.monitor.repositories.JobRepository;
 
 @Service
 public class JobService {
@@ -34,8 +30,8 @@ public class JobService {
 //	@Autowired
 //	private SchedulerTriggerFactory schedulerTriggerFactory;
 	
-	@Autowired
-	private JobRepository jobRepository;
+//	@Autowired
+//	private JobRepository jobRepository;
 	
 	@PostConstruct
 	public void setupJobs() throws ParseException, SchedulerException {

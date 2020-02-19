@@ -3,8 +3,6 @@ package compass.schedule.monitor;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
-import org.quartz.JobKey;
-import org.springframework.scheduling.quartz.QuartzJobBean;
 
 import org.slf4j.Logger; import org.slf4j.LoggerFactory;
 

@@ -3,7 +3,6 @@ package compass.schedule.monitor.repositories;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 import org.quartz.JobKey;
 import org.quartz.Scheduler;
@@ -18,7 +17,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 import org.springframework.stereotype.Component;
 
-import compass.schedule.monitor.CompassJobFactory;
 import compass.schedule.monitor.entity.Job;
 import compass.schedule.monitor.entity.QuartzJobId;
 

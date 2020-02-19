@@ -6,14 +6,12 @@ import org.springframework.shell.table.BeanListTableModel;
 import org.springframework.shell.table.BorderStyle;
 import org.springframework.shell.table.CellMatchers;
 import org.springframework.shell.table.NoWrapSizeConstraints;
-import org.springframework.shell.table.SizeConstraints;
 import org.springframework.shell.table.Table;
 import org.springframework.shell.table.TableBuilder;
 import org.springframework.shell.table.TableModel;
 
 //import calpers.eai.epm.engine.quartz.QuartzSchedulerService;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -21,7 +19,6 @@ import org.jline.utils.Log;
 //import org.quartz.JobDetail;
 //import org.quartz.Scheduler;
 //import org.quartz.SchedulerException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +26,6 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.web.client.RestTemplate;
 
 import compass.schedule.monitor.TriggerJob;
-import compass.schedule.monitor.api.*;
 @ShellComponent
 public class Commands {
 	

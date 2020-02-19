@@ -16,7 +16,7 @@ public class ApplicationStartup  implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		logger.info("================================================================================");
-		logger.info("compass.file.monitor started with options: {}", args.getSourceArgs());
+		logger.info("compass.file.monitor started with options: {}", (Object[]) args.getSourceArgs());
 		logger.info("================================================================================");
 		
 		WebClient client = WebClient.create("http://localhost:8080/api/exists?filename=//nas1/pers/AIS/ConfigAndSetup/jssecacerts");

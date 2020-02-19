@@ -53,7 +53,9 @@ public class QuartzConfig {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
         propertiesFactoryBean.setLocation(new ClassPathResource("/main.quartz.properties"));
         propertiesFactoryBean.afterPropertiesSet();
-        return propertiesFactoryBean.getObject();
+        
+        final Properties properties = (Properties) propertiesFactoryBean.getObject();
+        return properties;
     }
     private SchedulerFactoryBean buildScheduler(Properties quartzProperties) throws Exception {
         SchedulerFactoryBean scheduler = new SchedulerFactoryBean();
@@ -62,6 +64,7 @@ public class QuartzConfig {
         scheduler.setAutoStartup(false);
         scheduler.setJobFactory(jobFactory());
 //        quartzProperties.setProperty("org.quartz.plugin.jobInitializer.overWriteExistingJobs", "true");
+        
         try {
         	scheduler.setQuartzProperties(quartzProperties);
         }
@@ -69,7 +72,7 @@ public class QuartzConfig {
         	log.error("Error creating scheduler {}.", quartzProperties.getProperty("org.quartz.scheduler.instanceName", "UNKNOWN"));
         }
         scheduler.afterPropertiesSet();
-//        scheduler.setBeanName(quartzProperties.getProperty("org.quartz.scheduler.instanceName", "UNDEFINED"));
+        scheduler.setBeanName(quartzProperties.getProperty("org.quartz.scheduler.instanceName", "UNDEFINED"));
         log.info("=== Attempting to create scheduler: {}", scheduler.getScheduler().getSchedulerInstanceId());
         log.info("=== Creating scheduler {}", quartzProperties.getProperty("org.quartz.scheduler.instanceName", "UNDEFINED"));
         
@@ -82,12 +85,14 @@ public class QuartzConfig {
 //    public QuartzJobRepository quartzJobRepository() {
 //		return new QuartzJobRepository();
 //    }
-
+/*
     @Bean
     public Properties quartzProperties() throws IOException {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
         propertiesFactoryBean.setLocation(new ClassPathResource("/main.quartz.properties"));
         propertiesFactoryBean.afterPropertiesSet();
-        return propertiesFactoryBean.getObject();
+        final Properties properties = propertiesFactoryBean.getObject();
+        return properties;
     }
+*/
 }
