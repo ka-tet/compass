@@ -32,11 +32,11 @@ public class ApplicationStartup  implements ApplicationRunner {
                 .retrieve()
                 .bodyToMono(boolean.class).block();
 		logger.info(status ? "Startup test successful" : "Startup test failed");
-		url = "http://localhost:8080/api/exists?filename=classpath:heartbeat.txt";
-		 status = WebClient.create(url).get()
-                .retrieve()
-                .bodyToMono(boolean.class).block();
-		logger.info(status ? "Startup test successful" : "Startup test failed");
+//		url = "http://localhost:8080/api/exists?filename=classpath:heartbeat.txt";
+//		 status = WebClient.create(url).get()
+//                .retrieve()
+//                .bodyToMono(boolean.class).block();
+//		logger.info(status ? "Startup test successful" : "Startup test failed");
 		// Can also be tested using curl:
 		// curl -X GET -F filename=\\\\nas1\\pers\\AIS\\ConfigAndSetup\\jssecacerts http://localhost:8080/api/exists
 	}

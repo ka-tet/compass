@@ -1,22 +1,38 @@
 package compass.file.monitor;
 
+import java.util.Collections;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 public enum Protocol {
 	
-	FILESYSTEM ("file", "filesystem", FileSystemFile.class),
-	FTP ("ftp", "ftp", FileSystemFile.class),
-	SFTP ("sftp", "sftp", FileSystemFile.class),
-	HTTP ("http", "http", HttpFile.class);
+	FILESYSTEM ("file"),
+	FTP ("ftp"),
+	SFTP ("sftp"),
+	HTTP ("http"),
+	HTTPS ("https");
 
-	private String description;
 	private String code;
-	private Class subclass;
-	private Protocol (String code, String description, Class subclass) {
-		this.description = description;
+	private static final Map<String, Protocol> map = null;
+	private Protocol (String code) {
 		this.code = code;
-		this.subclass = subclass;
 	}
-//	public File getSubclassByCode(String code) {
-//		Class subclass;
-//		
-//	}
+	static {
+		Map<String, Protocol> map = new ConcurrentHashMap<String, Protocol>();
+		for (Protocol p : Protocol.values()) {
+			map.put(p.getCode(), p);
+		}
+		map = Collections.unmodifiableMap(map);
+	}
+	public static Protocol fromCode(String code) {
+		for (Protocol p : Protocol.values()) {
+			if (p.code.equalsIgnoreCase(code)) {
+				return p;
+			}
+		}
+		return null;
+	}
+	public String getCode() {
+		return this.code;
+	}
 }

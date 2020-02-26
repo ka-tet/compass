@@ -20,6 +20,10 @@ public abstract class File {
 	protected String path;
 	protected String authority;
 	
+	private Class subclass;
+	
+	private File typedFile;
+	
 	private URL urlObject;
 	
 	public File(String url) {
@@ -58,6 +62,18 @@ public abstract class File {
 			e.printStackTrace();
 		}
 		return connection;
+	}
+	
+	public static String getProtocol(String filename) {
+		String protocol = null;
+		try {
+			URL url = new URL(filename);
+			protocol = url.getProtocol();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return protocol;
 	}
 	
 	public abstract boolean exists();
