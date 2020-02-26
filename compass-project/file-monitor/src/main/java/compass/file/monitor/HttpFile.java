@@ -1,19 +1,35 @@
 package compass.file.monitor;
 
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
+import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 public class HttpFile extends File {
+
+	public HttpFile(String filename) {
+		super(filename);
+	}
 
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationStartup.class);
 	
 	@Override
 	public boolean exists() {
-		WebClient client = WebClient.create(filename);
-		WebClient.RequestBodySpec uri = client.method(HttpMethod.HEAD);
-		logger.info(uri.retrieve().bodyToMono(String.class).block());
+//		boolean success = WebClient.create(url).head().exchange()
+//                .map(response -> response.statusCode()).block().is2xxSuccessful();
+		try {
+			getConnection().connect();
+			logger.info("Length: {}", getConnection().getHeaderFields());
+			return true;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
+
 		return false;
 	}
 

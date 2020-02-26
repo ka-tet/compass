@@ -5,12 +5,8 @@ import java.nio.file.*;
 
 public class FileSystemFile extends File {
 	
-	public FileSystemFile() {
-		
-	}
-	
 	public FileSystemFile(String filename) {
-		this.filename = filename;
+		super(filename);
 		
 	}
 	
@@ -32,9 +28,9 @@ public class FileSystemFile extends File {
 		return;
 	}
 
-	@Override
+//	@Override
 	public boolean exists() {
-		return Files.exists(Paths.get(filename));
+		return Files.exists(Paths.get(url));
 	}
 
 	@Override
