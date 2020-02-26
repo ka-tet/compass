@@ -18,11 +18,12 @@ public class ApplicationStartup  implements ApplicationRunner {
 		logger.info("================================================================================");
 		logger.info("compass.file.monitor started with options: {}", (Object[]) args.getSourceArgs());
 		logger.info("================================================================================");
-		
-		WebClient client = WebClient.create("http://localhost:8080/api/exists?filename=classpath:heartbeat.txt");
-		WebClient.RequestBodySpec uri = client
-				.method(HttpMethod.GET);
-		logger.info(uri.retrieve().bodyToMono(String.class).block());
+
+		String url = "https://www.calpers.ca.gov";
+//		String url = "http://localhost:8080/api/exists?filename=classpath:heartbeat.txt";
+		WebClient client = WebClient.create(url);
+		WebClient.ResponseSpec response = client.head().uri("/docs/forms-publications/1959-survivor-valuation-2015.pdf").retrieve();
+		logger.info(response.bodyToMono(String.class).block());
 		// Can also be tested using curl:
 		// curl -X GET -F filename=\\\\nas1\\pers\\AIS\\ConfigAndSetup\\jssecacerts http://localhost:8080/api/exists
 	}

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import compass.file.monitor.File;
 import compass.file.monitor.FileSystemFile;
 
 @RestController
@@ -23,7 +24,8 @@ public class FileMonitorController {
 	@GetMapping(value="/exists")
 	public boolean exists(@RequestParam String filename) {
 		logger.info("/exists?filename=" + filename);
-		return FileSystemFile.exists(filename);
+		File file = new FileSystemFile(filename);
+		return file.exists();
 		
 	}
 

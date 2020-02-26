@@ -3,18 +3,19 @@ package compass.file.monitor;
 import java.io.IOException;
 import java.nio.file.*;
 
-public class FileSystemFile {
+public class FileSystemFile extends File {
 	
 	public FileSystemFile() {
 		
 	}
 	
 	public FileSystemFile(String filename) {
+		this.filename = filename;
 		
 	}
 	
-	public static boolean exists(String filename) {
-		return Files.exists(Paths.get(filename));
+	public boolean get() {
+		return true;
 	}
 	
 	public static void copy(String from, String to) {
@@ -29,6 +30,17 @@ public class FileSystemFile {
 		}
 		
 		return;
+	}
+
+	@Override
+	public boolean exists() {
+		return Files.exists(Paths.get(filename));
+	}
+
+	@Override
+	public boolean put() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 }
