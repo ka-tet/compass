@@ -1,11 +1,12 @@
 package compass.file.monitor;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.*;
 
 public class FileSystemFile extends File {
 	
-	public FileSystemFile(String filename) {
+	public FileSystemFile(String filename) throws MalformedURLException {
 		super(filename);
 		
 	}

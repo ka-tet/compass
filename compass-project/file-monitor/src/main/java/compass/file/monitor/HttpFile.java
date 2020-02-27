@@ -1,6 +1,7 @@
 package compass.file.monitor;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,7 +11,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 public class HttpFile extends File {
 
-	public HttpFile(String filename) {
+	public HttpFile(String filename) throws MalformedURLException {
 		super(filename);
 	}
 

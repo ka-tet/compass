@@ -24,12 +24,11 @@ public class ApplicationMonitor {
 	
 	@PostConstruct
 	public void init() throws Exception {
-		log.info("Compass ApplicationMonitor started.");
-		log.info("Timeout: " + timeout);
+		log.info("Started. Timeout: {}", timeout);
 	}
 	
 	@PreDestroy
 	public void destroy() {
-		log.info("Schedular ApplicationMonitor shutdown.");
+		log.info("Shutdown.");
 	}
 }

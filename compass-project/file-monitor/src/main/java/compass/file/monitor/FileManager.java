@@ -1,5 +1,8 @@
 package compass.file.monitor;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -8,19 +11,23 @@ import org.springframework.stereotype.Service;
 public class FileManager {
 	private static final Logger logger = LoggerFactory.getLogger(FileManager.class);
 	
-	public static boolean exists(String filename) {
-		Protocol protocol = Protocol.fromCode(File.getProtocol(filename));
+	public static boolean exists(URL url) {
+		return true;
+	}
+	
+	public static boolean exists(String url) throws MalformedURLException {
+		Protocol protocol = Protocol.fromCode(File.getProtocol(url));
 		File file = null;
 		
 		switch(protocol) {
 		case HTTP:
-			file = new HttpFile(filename);
+			file = new HttpFile(url);
 			break;
 		case HTTPS:
-			file = new HttpFile(filename);
+			file = new HttpFile(url);
 			break;
 		case FILESYSTEM:
-			file = new FileSystemFile(filename);
+			file = new FileSystemFile(url);
 			break;
 		case FTP:
 		case SFTP:
@@ -33,6 +40,4 @@ public class FileManager {
 	public void copy(File from, File to) {
 		
 	}
-	
-
 }

@@ -30,7 +30,7 @@ public enum Protocol {
 				return p;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("Invalid protocol value.");
 	}
 	public String getCode() {
 		return this.code;

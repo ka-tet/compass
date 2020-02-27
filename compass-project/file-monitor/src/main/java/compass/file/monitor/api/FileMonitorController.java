@@ -1,5 +1,7 @@
 package compass.file.monitor.api;
 
+import java.net.MalformedURLException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,7 @@ public class FileMonitorController {
 	}
 	
 	@GetMapping(value="/exists")
-	public boolean exists(@RequestParam String filename) {
+	public boolean exists(@RequestParam String filename) throws MalformedURLException {
 		logger.info("/exists?filename=" + filename);
 //		File file = new FileSystemFile(filename);
 		return fileManager.exists(filename);

@@ -26,29 +26,18 @@ public abstract class File {
 	
 	private URL urlObject;
 	
-	public File(String url) {
+	public File(String url) throws MalformedURLException {
 		this.url = url;
 		try {
-			this.urlObject = new URL(url);
-		} catch (MalformedURLException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			URL parse = new URL(url);
-			this.protocol = parse.getProtocol();
-			this.port = parse.getPort();
-			this.host = parse.getHost();
-			this.path = parse.getPath();
-			this.authority = parse.getAuthority();
-			logger.info("Protocol: {}", this.protocol);
-			logger.info("Port: {}", this.port);
-			logger.info("Host: {}", this.host);
-			logger.info("Path: {}", this.path);
-			logger.info("Authority: {}", this.authority);
+			this.urlObject = getUrlFromUrlString(url);
+			this.protocol = this.urlObject.getProtocol();
+			this.port = this.urlObject.getPort();
+			this.host = this.urlObject.getHost();
+			this.path = this.urlObject.getPath();
+			this.authority = this.urlObject.getAuthority();
 		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("Invalid url: {}", url);
+			throw e;
 		}
 		
 	}
@@ -75,7 +64,13 @@ public abstract class File {
 		}
 		return protocol;
 	}
-	
+	public static URL getUrlFromUrlString(String url) throws MalformedURLException {
+		try {
+			return new URL (url);
+		} catch (Exception e) {
+			throw new MalformedURLException("Invalid url");
+		}
+	}
 	public abstract boolean exists();
 	public abstract boolean get();
 	public abstract boolean put();

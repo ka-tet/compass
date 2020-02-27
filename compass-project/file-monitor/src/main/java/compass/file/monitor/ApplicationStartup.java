@@ -28,6 +28,7 @@ public class ApplicationStartup  implements ApplicationRunner {
 		logger.info("================================================================================");
 
 		String url = "http://localhost:8080/api/exists?filename=https://www.calpers.ca.gov/docs/formxs-publications/1959-survivor-valuation-2015.pdf";
+		url = "http://localhost:8080/api/exists?filename=https://raw.githubusercontent.com/spring-projects/spring-framework/master/README.md";
 		boolean status = WebClient.create(url).get()
                 .retrieve()
                 .bodyToMono(boolean.class).block();
