@@ -4,10 +4,16 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.*;
 
-public class FileSystemFile extends File {
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class FileSystemFile implements FileInterface {
+	private static final Logger logger = LoggerFactory.getLogger(FileSystemFile.class);
 	
-	public FileSystemFile(String filename) throws MalformedURLException {
-		super(filename);
+	protected File file;
+	
+	public FileSystemFile(File file) throws MalformedURLException {
+		this.file = file;
 		
 	}
 	
@@ -22,8 +28,7 @@ public class FileSystemFile extends File {
 		try {
 			Files.copy(fromPath, toPath, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("Not found copy: {}", from);
 		}
 		
 		return;
@@ -31,13 +36,18 @@ public class FileSystemFile extends File {
 
 //	@Override
 	public boolean exists() {
-		return Files.exists(Paths.get(url));
+		try {
+			this.file.getConnection().connect();
+			return true;
+		} catch (Exception e) {
+			logger.info("Not found fsf: {}", file.url);
+		}
+		return false;
 	}
 
 	@Override
 	public boolean put() {
 		// TODO Auto-generated method stub
-		return false;
+		return this.file.put();
 	}
-
 }

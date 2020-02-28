@@ -9,41 +9,38 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
-public class HttpFile extends File {
-
-	public HttpFile(String filename) throws MalformedURLException {
-		super(filename);
-	}
-
-	private static final Logger logger = LoggerFactory.getLogger(ApplicationStartup.class);
+public class HttpFile implements FileInterface {
 	
-	@Override
+	File file;
+
+	public HttpFile(File file) {
+		this.file = file;
+	}
+	private static final Logger logger = LoggerFactory.getLogger(HttpFile.class);
+	
 	public boolean exists() {
 //		boolean success = WebClient.create(url).head().exchange()
 //                .map(response -> response.statusCode()).block().is2xxSuccessful();
 		try {
-			getConnection().connect();
-			logger.info("Length: {}", getConnection().getHeaderFields());
+			this.file.getConnection().connect();
 			return true;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("Not found: {}", this.file.url);
 		}
 	
 
 		return false;
 	}
 
-	@Override
 	public boolean get() {
 		// TODO Auto-generated method stub
-		return false;
+		return this.file.get();
 	}
 
-	@Override
 	public boolean put() {
 		// TODO Auto-generated method stub
-		return false;
+		return this.file.put();
 	}
 
 }

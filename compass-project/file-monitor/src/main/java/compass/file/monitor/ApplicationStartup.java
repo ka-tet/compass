@@ -1,6 +1,7 @@
 package compass.file.monitor;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.http.HttpMethod;
@@ -9,6 +10,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,24 +23,29 @@ public class ApplicationStartup  implements ApplicationRunner {
 	
 	@Autowired
 	FileManager fileManager;
-	
+
+	@Value("${smoketesturl:}")
+	List<String> urls;
+	@Value("${existsurl}")
+	String existsurl;
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		logger.info("================================================================================");
 		logger.info("compass.file.monitor started with options: {}", (Object[]) args.getSourceArgs());
 		logger.info("================================================================================");
 
-		String url = "http://localhost:8080/api/exists?filename=https://www.calpers.ca.gov/docs/formxs-publications/1959-survivor-valuation-2015.pdf";
-		url = "http://localhost:8080/api/exists?filename=https://raw.githubusercontent.com/spring-projects/spring-framework/master/README.md";
-		boolean status = WebClient.create(url).get()
-                .retrieve()
-                .bodyToMono(boolean.class).block();
-		logger.info(status ? "Startup test successful" : "Startup test failed");
-//		url = "http://localhost:8080/api/exists?filename=classpath:heartbeat.txt";
-//		 status = WebClient.create(url).get()
-//                .retrieve()
-//                .bodyToMono(boolean.class).block();
-//		logger.info(status ? "Startup test successful" : "Startup test failed");
+		for(String url: urls) {
+			boolean status;
+			try {
+				status = WebClient.create(existsurl + url).get()
+	                .retrieve()
+	                .bodyToMono(boolean.class).block();
+			} catch (Exception e) {
+				status = false;
+			}
+			logger.info(status ? url + " successful" : url + " failed");
+		}
+		
 		// Can also be tested using curl:
 		// curl -X GET -F filename=\\\\nas1\\pers\\AIS\\ConfigAndSetup\\jssecacerts http://localhost:8080/api/exists
 	}

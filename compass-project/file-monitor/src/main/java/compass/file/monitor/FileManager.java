@@ -17,23 +17,7 @@ public class FileManager {
 	
 	public static boolean exists(String url) throws MalformedURLException {
 		Protocol protocol = Protocol.fromCode(File.getProtocol(url));
-		File file = null;
-		
-		switch(protocol) {
-		case HTTP:
-			file = new HttpFile(url);
-			break;
-		case HTTPS:
-			file = new HttpFile(url);
-			break;
-		case FILESYSTEM:
-			file = new FileSystemFile(url);
-			break;
-		case FTP:
-		case SFTP:
-		default:
-			logger.info("Protocol '{}' not implemented.");
-		}
+		File file = new File(url);
 		return file.exists();
 	}
 	

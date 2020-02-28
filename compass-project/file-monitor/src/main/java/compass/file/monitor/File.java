@@ -8,13 +8,14 @@ import java.net.URLConnection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class File {
+public class File implements FileInterface{
 
 	private static final Logger logger = LoggerFactory.getLogger(File.class);
 	
 	
 	protected String url;
-	protected String protocol;
+	protected Protocol protocol;
+	protected String scheme;
 	protected int port;
 	protected String host;
 	protected String path;
@@ -22,7 +23,7 @@ public abstract class File {
 	
 	private Class subclass;
 	
-	private File typedFile;
+	private FileInterface typedFile;
 	
 	private URL urlObject;
 	
@@ -30,11 +31,30 @@ public abstract class File {
 		this.url = url;
 		try {
 			this.urlObject = getUrlFromUrlString(url);
-			this.protocol = this.urlObject.getProtocol();
+			this.scheme = this.urlObject.getProtocol();
+			this.protocol = Protocol.fromCode(this.scheme);
 			this.port = this.urlObject.getPort();
 			this.host = this.urlObject.getHost();
 			this.path = this.urlObject.getPath();
 			this.authority = this.urlObject.getAuthority();
+			switch(protocol) {
+			case HTTP:
+				this.typedFile = new HttpFile(this);
+				break;
+			case HTTPS:
+				this.typedFile = new HttpFile(this);
+				break;
+			case FILESYSTEM:
+				this.typedFile = new FileSystemFile(this);
+				break;
+			case CLASSPATH:
+				this.typedFile = new ClasspathFile(this);
+				break;
+			case FTP:
+			case SFTP:
+			default:
+				logger.info("Protocol '{}' not implemented.");
+			}
 		} catch (MalformedURLException e) {
 			logger.info("Invalid url: {}", url);
 			throw e;
@@ -48,7 +68,7 @@ public abstract class File {
 			connection = urlObject.openConnection();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.info("Not found: connection {}", url);
 		}
 		return connection;
 	}
@@ -71,8 +91,14 @@ public abstract class File {
 			throw new MalformedURLException("Invalid url");
 		}
 	}
-	public abstract boolean exists();
-	public abstract boolean get();
-	public abstract boolean put();
+	public boolean exists() {
+		return this.typedFile.exists();
+	}
+	public boolean get() {
+		return this.typedFile.get();
+	}
+	public boolean put() {
+		return this.typedFile.put();
+	}
 
 }

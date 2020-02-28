@@ -6,11 +6,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public enum Protocol {
 	
+	CLASSPATH ("classpath"),
 	FILESYSTEM ("file"),
 	FTP ("ftp"),
-	SFTP ("sftp"),
 	HTTP ("http"),
-	HTTPS ("https");
+	HTTPS ("https"),
+	SFTP ("sftp");
 
 	private String code;
 	private static final Map<String, Protocol> map = null;

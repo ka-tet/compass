@@ -30,8 +30,7 @@ public class FileMonitorController {
 	
 	@GetMapping(value="/exists")
 	public boolean exists(@RequestParam String filename) throws MalformedURLException {
-		logger.info("/exists?filename=" + filename);
-//		File file = new FileSystemFile(filename);
+//		logger.info("/exists?filename=" + filename);
 		return fileManager.exists(filename);
 		
 	}
