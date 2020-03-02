@@ -9,13 +9,15 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-
+import org.springframework.stereotype.Component;
+@Component
 public class CompassFile implements FileInterface{
 
 	private static final Logger logger = LoggerFactory.getLogger(CompassFile.class);
 	
 	@Value("${tempfolder}")
 	protected String tempfolder;
+	
 	public String getTempfolder() {
 		return tempfolder;
 	}
@@ -23,7 +25,7 @@ public class CompassFile implements FileInterface{
 	public void setTempfolder(String tempfolder) {
 		this.tempfolder = tempfolder;
 	}
-	protected String url;
+	public String url;
 	protected Protocol protocol;
 	protected String scheme;
 	protected int port;
@@ -46,12 +48,15 @@ public class CompassFile implements FileInterface{
 	public CompassFile(URL url) throws MalformedURLException {
 		init(url);
 	}
-	
+
+	public CompassFile() {
+		
+	}
 	public URL getTempFileUrl() {
 		if(tempFileUrl == null) {
 			try {
-				logger.info(getTempFolder());
-				tempFileUrl = new URL(getTempFolder() + UUID.randomUUID().toString() + ".dat");
+				logger.info(getTempfolder());
+				tempFileUrl = new URL(getTempfolder() + UUID.randomUUID().toString() + ".dat");
 			} catch (MalformedURLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -68,7 +73,7 @@ public class CompassFile implements FileInterface{
 		this.urlObject = urlObject;
 	}
 
-	protected URLConnection getConnection() {
+	public URLConnection getConnection() {
 		URLConnection connection = null;
 		try {
 			connection = urlObject.openConnection();
@@ -96,9 +101,6 @@ public class CompassFile implements FileInterface{
 		} catch (Exception e) {
 			throw new MalformedURLException("Invalid url");
 		}
-	}
-	public String getTempFolder() {
-		return this.tempfolder;
 	}
 	public boolean exists() {
 		return this.typedFile.exists();
@@ -134,6 +136,8 @@ public class CompassFile implements FileInterface{
 				break;
 			case FTP:
 			case SFTP:
+				this.typedFile = new FtpFile(this);
+				break;
 			default:
 				logger.info("Protocol '{}' not implemented.");
 			}

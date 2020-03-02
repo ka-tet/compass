@@ -40,9 +40,11 @@ public class ApplicationStartup  implements ApplicationRunner {
 		logger.info("================================================================================");
 
 		// Ensure that API is operational
+		logger.info("Exists tests:");
 		for(String url: urls) {
 			logger.info(url + " " + callExists(existsurl + url));
 		}
+		logger.info("Get tests:");
 		for(String url: gettesturls) {
 			logger.info(url + " " + callGet(geturl + url));
 		}

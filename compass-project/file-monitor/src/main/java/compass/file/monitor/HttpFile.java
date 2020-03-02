@@ -13,7 +13,7 @@ import org.apache.commons.io.FileUtils;
 
 public class HttpFile implements FileInterface {
 	
-	CompassFile file;
+	private CompassFile file;
 
 	public HttpFile(CompassFile file) {
 		this.file = file;

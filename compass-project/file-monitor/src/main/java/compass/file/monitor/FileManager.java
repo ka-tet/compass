@@ -32,8 +32,8 @@ public class FileManager {
 	public static String get(String url) throws IOException, URISyntaxException {
 		CompassFile file = new CompassFile(url);
 		File tempFile = new File(file.getTempFileUrl().toURI());
+		logger.info("Temp file: {}",tempFile.toURI().toURL().toString());
 		FileUtils.copyURLToFile(file.getUrlObject(), tempFile);
-		logger.info(tempFile.toURI().toURL().toString());
 		return (tempFile.toURI().toURL().toString());
 	}
 }
