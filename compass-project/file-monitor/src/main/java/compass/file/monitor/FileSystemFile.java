@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 public class FileSystemFile implements FileInterface {
 	private static final Logger logger = LoggerFactory.getLogger(FileSystemFile.class);
 	
-	protected File file;
+	protected CompassFile file;
 	
-	public FileSystemFile(File file) throws MalformedURLException {
+	public FileSystemFile(CompassFile file) throws MalformedURLException {
 		this.file = file;
 		
 	}

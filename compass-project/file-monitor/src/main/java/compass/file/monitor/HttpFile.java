@@ -3,17 +3,19 @@ package compass.file.monitor;
 import java.io.IOException;
 import java.net.MalformedURLException;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.apache.commons.io.FileUtils;
 
 public class HttpFile implements FileInterface {
 	
-	File file;
+	CompassFile file;
 
-	public HttpFile(File file) {
+	public HttpFile(CompassFile file) {
 		this.file = file;
 	}
 	private static final Logger logger = LoggerFactory.getLogger(HttpFile.class);
@@ -34,8 +36,14 @@ public class HttpFile implements FileInterface {
 	}
 
 	public boolean get() {
-		// TODO Auto-generated method stub
-		return this.file.get();
+		try {
+			FileUtils.copyURLToFile(this.file.getUrlObject(), new java.io.File(this.file.getTempfolder()), 1, 1);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		};
+		return true;
 	}
 
 	public boolean put() {

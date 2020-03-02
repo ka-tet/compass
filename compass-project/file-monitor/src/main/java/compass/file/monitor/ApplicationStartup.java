@@ -26,27 +26,48 @@ public class ApplicationStartup  implements ApplicationRunner {
 
 	@Value("${smoketesturl:}")
 	List<String> urls;
+	@Value("${gettesturl:}")
+	List<String> gettesturls;
 	@Value("${existsurl}")
 	String existsurl;
+	@Value("${geturl}")
+	String geturl;
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		logger.info("================================================================================");
 		logger.info("compass.file.monitor started with options: {}", (Object[]) args.getSourceArgs());
 		logger.info("================================================================================");
 
+		// Ensure that API is operational
 		for(String url: urls) {
-			boolean status;
-			try {
-				status = WebClient.create(existsurl + url).get()
-	                .retrieve()
-	                .bodyToMono(boolean.class).block();
-			} catch (Exception e) {
-				status = false;
-			}
-			logger.info(status ? url + " successful" : url + " failed");
+			logger.info(url + " " + callExists(existsurl + url));
 		}
-		
+		for(String url: gettesturls) {
+			logger.info(url + " " + callGet(geturl + url));
+		}
 		// Can also be tested using curl:
 		// curl -X GET -F filename=\\\\nas1\\pers\\AIS\\ConfigAndSetup\\jssecacerts http://localhost:8080/api/exists
+	}
+	
+	private boolean callExists(String url) {
+		try {
+			return WebClient.create(url).get()
+                .retrieve()
+                .bodyToMono(boolean.class).block();
+		} catch (Exception e) {
+			return false;
+		}
+		
+	}
+	private String callGet(String url) {
+		try {
+			return WebClient.create(url).get()
+                .retrieve()
+                .bodyToMono(String.class).block();
+		} catch (Exception e) {
+			return null;
+		}
+		
 	}
 }
