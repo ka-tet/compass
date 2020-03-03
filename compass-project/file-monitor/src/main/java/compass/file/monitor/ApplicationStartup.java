@@ -7,6 +7,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import reactor.core.publisher.Mono;
@@ -16,22 +17,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Component
+@Service
 public class ApplicationStartup  implements ApplicationRunner {
 
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationStartup.class);
 	
 	@Autowired
 	FileManager fileManager;
+	@Autowired
+	private Configuration config;
 
-	@Value("${smoketesturl:}")
-	List<String> urls;
-	@Value("${gettesturl:}")
-	List<String> gettesturls;
-	@Value("${existsurl}")
-	String existsurl;
-	@Value("${geturl}")
-	String geturl;
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -41,12 +36,13 @@ public class ApplicationStartup  implements ApplicationRunner {
 
 		// Ensure that API is operational
 		logger.info("Exists tests:");
-		for(String url: urls) {
-			logger.info(url + " " + callExists(existsurl + url));
+		for(String url: config.getExiststesturl()) {
+			logger.info(url + " " + callExists(config.getExistsurl() + url));
 		}
+		logger.info("Temp folder: {}", config.getTempfolder());
 		logger.info("Get tests:");
-		for(String url: gettesturls) {
-			logger.info(url + " " + callGet(geturl + url));
+		for(String url: config.getGettesturl()) {
+			logger.info(url + " " + callGet(config.getGeturl() + url));
 		}
 		// Can also be tested using curl:
 		// curl -X GET -F filename=\\\\nas1\\pers\\AIS\\ConfigAndSetup\\jssecacerts http://localhost:8080/api/exists

@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 @Component
@@ -15,16 +16,9 @@ public class CompassFile implements FileInterface{
 
 	private static final Logger logger = LoggerFactory.getLogger(CompassFile.class);
 	
-	@Value("${tempfolder}")
-	protected String tempfolder;
+	@Autowired
+	protected Configuration config;
 	
-	public String getTempfolder() {
-		return tempfolder;
-	}
-
-	public void setTempfolder(String tempfolder) {
-		this.tempfolder = tempfolder;
-	}
 	public String url;
 	protected Protocol protocol;
 	protected String scheme;
@@ -55,11 +49,9 @@ public class CompassFile implements FileInterface{
 	public URL getTempFileUrl() {
 		if(tempFileUrl == null) {
 			try {
-				logger.info(getTempfolder());
-				tempFileUrl = new URL(getTempfolder() + UUID.randomUUID().toString() + ".dat");
+				tempFileUrl = new URL(config.getTempfolder() + UUID.randomUUID().toString() + ".dat");
 			} catch (MalformedURLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				logger.info("Malformed temp folder URL: {}", config.getTempfolder());
 			}
 		}
 		return tempFileUrl;
@@ -145,6 +137,7 @@ public class CompassFile implements FileInterface{
 			logger.info("Invalid url: {}", url);
 			throw e;
 		}
+		logger.info("config.getTempfolder: {}", config.getTempfolder());
 		
 		
 	}

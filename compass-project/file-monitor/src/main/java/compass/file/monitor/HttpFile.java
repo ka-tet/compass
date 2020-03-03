@@ -37,7 +37,7 @@ public class HttpFile implements FileInterface {
 
 	public boolean get() {
 		try {
-			FileUtils.copyURLToFile(this.file.getUrlObject(), new java.io.File(this.file.getTempfolder()), 1, 1);
+			FileUtils.copyURLToFile(this.file.getUrlObject(), new java.io.File(this.file.config.getTempfolder()), 1, 1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
