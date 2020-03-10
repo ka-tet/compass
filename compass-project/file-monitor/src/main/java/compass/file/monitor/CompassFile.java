@@ -16,9 +16,6 @@ public class CompassFile implements FileInterface{
 
 	private static final Logger logger = LoggerFactory.getLogger(CompassFile.class);
 	
-	@Autowired
-	protected Configuration config;
-	
 	public String url;
 	protected Protocol protocol;
 	protected String scheme;
@@ -27,6 +24,7 @@ public class CompassFile implements FileInterface{
 	protected String path;
 	protected String authority;
 	protected URL tempFileUrl;
+	protected String tempFolder;
 	
 	private Class subclass;
 	
@@ -34,8 +32,9 @@ public class CompassFile implements FileInterface{
 	
 	private URL urlObject;
 	
-	public CompassFile(String url) throws MalformedURLException {
+	public CompassFile(String url, String tempFolder) throws MalformedURLException {
 		this.url = url;
+		this.tempFolder = tempFolder;
 		init(getUrlFromUrlString(url));
 	}
 	
@@ -49,9 +48,9 @@ public class CompassFile implements FileInterface{
 	public URL getTempFileUrl() {
 		if(tempFileUrl == null) {
 			try {
-				tempFileUrl = new URL(config.getTempfolder() + UUID.randomUUID().toString() + ".dat");
+				tempFileUrl = new URL(this.tempFolder + UUID.randomUUID().toString() + ".dat");
 			} catch (MalformedURLException e) {
-				logger.info("Malformed temp folder URL: {}", config.getTempfolder());
+				logger.info("Malformed temp folder URL: {}", tempFolder);
 			}
 		}
 		return tempFileUrl;
@@ -65,7 +64,7 @@ public class CompassFile implements FileInterface{
 		this.urlObject = urlObject;
 	}
 
-	public URLConnection getConnection() {
+	protected URLConnection getConnection() {
 		URLConnection connection = null;
 		try {
 			connection = urlObject.openConnection();
@@ -137,9 +136,6 @@ public class CompassFile implements FileInterface{
 			logger.info("Invalid url: {}", url);
 			throw e;
 		}
-		logger.info("config.getTempfolder: {}", config.getTempfolder());
-		
-		
 	}
 
 }

@@ -23,8 +23,6 @@ public class ApplicationStartup  implements ApplicationRunner {
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationStartup.class);
 	
 	@Autowired
-	FileManager fileManager;
-	@Autowired
 	private Configuration config;
 
 	

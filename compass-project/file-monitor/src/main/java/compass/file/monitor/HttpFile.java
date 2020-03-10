@@ -27,17 +27,13 @@ public class HttpFile implements FileInterface {
 			this.file.getConnection().connect();
 			return true;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			logger.info("Not found: {}", this.file.url);
+			return false;
 		}
-	
-
-		return false;
 	}
 
 	public boolean get() {
 		try {
-			FileUtils.copyURLToFile(this.file.getUrlObject(), new java.io.File(this.file.config.getTempfolder()), 1, 1);
+			FileUtils.copyURLToFile(this.file.getUrlObject(), new java.io.File(this.file.getTempFileUrl().toString()), 1, 1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
